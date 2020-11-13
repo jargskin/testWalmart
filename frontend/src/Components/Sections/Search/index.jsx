@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Formik, Field, Form } from 'formik';
 
+//Services
+import ServiceSearch from '../../Services/Search/Search';
+
+//Components
+import ComponentSearch from '../Search/ResultGrid/index';
+
 
 const Search = () => {
 
@@ -18,7 +24,8 @@ const Search = () => {
           search: '',
         }}
         onSubmit={async (values) => {
-          setData(values.search)
+          const resp = await ServiceSearch(values.search);
+          setData(resp);
         }}
       >
         <Form>
@@ -29,11 +36,14 @@ const Search = () => {
             placeholder="Busqueda..."
             type="text"
           />
-          <button type="submit"><i className="fas fa-search" /></button>
+          <button className="btn btn-primary" type="submit"><i className="fas fa-search" /></button>
         </Form>
       </Formik>
-  
-
+      {
+        (Data) && (
+          <ComponentSearch data={Data} />
+        )
+      }
       </div>
     </div>
   )
