@@ -1,0 +1,47 @@
+version: "3"
+services:
+  walmart-front:
+    environment:
+      - SERVER_PORT=3000
+      - REACT_APP_WALMART_BACKEND=http://walmart_backend:4000
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - .:/frontend/src
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - walmart_backend
+    links: 
+      - walmart_backend
+
+  walmart_backend:
+    
+    environment:
+      - SERVER_PORT=4000
+      - MONGO_DB=mongodb+srv://root:mdcgoYW6fq4eoRQt@cluster0.djes1.mongodb.net/walmart
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - .:/backend
+    ports: 
+      - "4000:4000"
+    # depends_on: 
+    #   - walmart-db
+  # walmart-db:
+  #   image: mongo:3.6.8
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=productListUser
+  #     - MONGO_INITDB_ROOT_PASSWORD=productListPassword
+  #   ports:
+  #     - "27017:27017"
+  # migration:
+  #   image: mongo:3.6.8
+  #   depends_on:
+  #     - db
+  #   working_dir: /db
+  #   command: /bin/bash -c './import.sh db'
+  #   volumes:
+  #     - ./db:/db
