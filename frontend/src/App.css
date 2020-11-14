@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+.tachado {
+  text-decoration: line-through;
+}
+.productItem {
+  transition: box-shadow 0.05s linear 0s;
+}
+
+.productItem:hover {
+  border: 1px solid red;
+}
