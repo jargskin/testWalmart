@@ -6,5 +6,5 @@ COPY server.js ./
 COPY package*.json ./
 RUN npm install
 RUN npm install react-scripts@3.0.1 -g
-# CMD ["npm","run","build:server"]
-CMD ["npm","start"]
+CMD ["npm","run","build:server"]
+# CMD ["npm","start"]

@@ -4,6 +4,7 @@ const compression = require('compression');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -17,6 +18,11 @@ app.use(cors());
 
 /** Security */
 app.disable('x-powered-by');
+
+app.use('/api', createProxyMiddleware({
+    target: 'http://walmart_backend:4000/',
+    changeOrigin: true
+}));
 
 /** Routes */
 app.get('*', (req, res) => {

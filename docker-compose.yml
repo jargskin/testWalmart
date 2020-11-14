@@ -13,11 +13,10 @@ services:
       - "3000:3000"
     depends_on: 
       - walmart_backend
-    links: 
-      - walmart_backend
+    networks:
+      - app-network
 
   walmart_backend:
-    
     environment:
       - SERVER_PORT=4000
       - MONGO_DB=mongodb+srv://root:mdcgoYW6fq4eoRQt@cluster0.djes1.mongodb.net/walmart
@@ -28,6 +27,13 @@ services:
       - .:/backend
     ports: 
       - "4000:4000"
+    networks:
+      - app-network
+
+  
+networks:
+  app-network:
+    driver: bridge
     # depends_on: 
     #   - walmart-db
   # walmart-db:
