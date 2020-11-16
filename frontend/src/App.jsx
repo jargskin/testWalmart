@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import routes from './Components/Routes/Routes';
+import routes from './Routes/Routes';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './App.css';
 
 function App() {
